@@ -35,7 +35,10 @@ pub enum Error {
 
 impl From<ServiceError> for Error {
     fn from(err: ServiceError) -> Self {
-        err.into()
+        match err {
+            ServiceError::ReposError(e) => Self::ReposError(e),
+            ServiceError::RDBError(e) => Self::RDB(e),
+        }
     }
 }
 
