@@ -16,12 +16,18 @@ pub mod tests {
         pub mock_user_repo: MockUserRepository,
     }
 
-    impl MockRepositoryManager {
-        pub fn new() -> Self {
+    impl Default for MockRepositoryManager {
+        fn default() -> Self {
             Self {
                 db_pool: MockRDBPool,
                 mock_user_repo: Default::default(),
             }
+        }
+    }
+
+    impl MockRepositoryManager {
+        pub fn new() -> Self {
+            Self::default()
         }
     }
 
