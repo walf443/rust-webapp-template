@@ -1,10 +1,11 @@
-use {{ crate_name }}_core::rdb::{RDBConnection, RDBConnectionInner, RDBError, RDBPool};
-use sqlx::mysql::MySql;
-use sqlx::pool::PoolConnection;
-use sqlx::{MySqlConnection, MySqlPool};
 use std::any::Any;
 use std::future::Future;
 use std::pin::Pin;
+
+use sqlx::mysql::MySql;
+use sqlx::pool::PoolConnection;
+use sqlx::{MySqlConnection, MySqlPool};
+use {{ crate_name }}_core::rdb::{RDBConnection, RDBConnectionInner, RDBError, RDBPool};
 
 /// Wrapper around sqlx PoolConnection for the RDBConnectionInner trait.
 struct MySqlPooledConnection(PoolConnection<MySql>);
@@ -107,11 +108,7 @@ pub(crate) async fn get_test_pool() -> MySqlRDBPool {
     let ctx = TEST_CONTEXT
         .get_or_init(|| async {
             let container = Mysql::default()
-                .with_init_sql(
-                    include_str!("../schema.sql")
-                        .to_string()
-                        .into_bytes(),
-                )
+                .with_init_sql(include_str!("../schema.sql").to_string().into_bytes())
                 .start()
                 .await
                 .expect("Failed to start MySQL container");

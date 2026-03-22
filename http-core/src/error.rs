@@ -1,8 +1,9 @@
+use std::borrow::Cow;
+
 use crate::responses::ResponseError;
 use axum::http::StatusCode;
 use {{ crate_name }}_core::repos::ReposError;
 use {{ crate_name }}_core::services::ServiceError;
-use std::borrow::Cow;
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
@@ -34,9 +35,7 @@ pub enum Error {
 
 impl From<ServiceError> for Error {
     fn from(err: ServiceError) -> Self {
-        match err {
-            e => e.into(),
-        }
+        err.into()
     }
 }
 

@@ -56,7 +56,10 @@ impl UserRepository for UserRepositoryInfra {
         Ok(user_model.map(User::from))
     }
 
-    async fn find_all(&self, conn: &mut RDBConnection) -> {{ crate_name }}_core::repos::Result<Vec<User>> {
+    async fn find_all(
+        &self,
+        conn: &mut RDBConnection,
+    ) -> {{ crate_name }}_core::repos::Result<Vec<User>> {
         let conn = crate::rdb::get_mysql_conn(conn);
         let users: Vec<crate::rows::UserRow> = sqlx::query_as(
             "SELECT id, name, display_name, description, password as hashed_password FROM users",
