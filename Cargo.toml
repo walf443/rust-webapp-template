@@ -1,0 +1,32 @@
+[workspace]
+members = ["core", "infra", "http-core", "http-app"]
+resolver = "2"
+
+[workspace.dependencies]
+kubetsu = { version = "0.4", features = ["serde", "fake", "sqlx-mysql"]}
+async-session = "3"
+axum = { version = "0.8", features = ["tracing"] }
+axum-extra = { version = "0.10", features = ["cookie-signed", "cookie-key-expansion", "typed-header"] }
+async-trait = "0.1"
+base64 = "0.21"
+bcrypt = "0.15"
+chrono = { version = "0.4", features = ["serde"] }
+hyper = "0.14"
+listenfd = "1"
+num-traits = "0.2"
+serde = { version = "1", features = ["derive"] }
+sha2 = "0.10"
+thiserror = "1"
+time = "0.3"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "process", "fs"] }
+tokio-util = { version = "0.7", features = ["io"] }
+tower-http = { version = "0.6", features = ["trace"] }
+tracing = "0.1"
+tracing-subscriber = { version =  "0.3", features = ["env-filter"] }
+uuid = { version = "1", features = ["v4"] }
+fake = { version = "4", features=["derive"] }
+mockall = "0.13"
+qbey = { version = "0.1" }
+sqlx = { version = "0.8", features = ["mysql", "runtime-tokio"] }
+testcontainers = "0.27"
+testcontainers-modules = { version = "0.15", features = ["mysql"] }

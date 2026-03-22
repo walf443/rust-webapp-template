@@ -1,0 +1,30 @@
+[package]
+name = "{{ project-name }}-http-app"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+{{ project-name }}-core = { path = "../core" }
+{{ project-name }}-http-core = { path = "../http-core" }
+{{ project-name }}-infra= { path = "../infra" }
+
+async-session.workspace = true
+axum-extra.workspace = true
+axum.workspace = true
+base64.workspace = true
+bcrypt.workspace = true
+chrono.workspace = true
+hyper.workspace = true
+listenfd.workspace = true
+serde.workspace = true
+sha2.workspace = true
+sqlx.workspace = true
+thiserror.workspace = true
+time.workspace = true
+tokio-util.workspace = true
+tokio.workspace = true
+tower-http.workspace = true
+tracing-subscriber.workspace = true
+tracing.workspace = true
+uuid.workspace = true

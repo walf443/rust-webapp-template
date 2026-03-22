@@ -1,0 +1,21 @@
+[package]
+name = "{{ project-name }}-infra"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+{{ project-name }}-core = { path = "../core" }
+
+async-trait.workspace = true
+serde.workspace = true
+sqlx.workspace = true
+thiserror.workspace = true
+time.workspace = true
+tokio.workspace = true
+fake.workspace = true
+
+[dev-dependencies]
+{{ project-name }}-core = { path = "../core", features = ["test"]}
+testcontainers.workspace = true
+testcontainers-modules.workspace = true
