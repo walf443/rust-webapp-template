@@ -25,7 +25,7 @@ tracing = "0.1"
 tracing-subscriber = { version =  "0.3", features = ["env-filter"] }
 uuid = { version = "1", features = ["v4"] }
 fake = { version = "4", features=["derive"] }
-mockall = "0.13"
+mockall = "0.14"
 qbey = { version = "0.1" }
 sqlx = { version = "0.8", features = ["mysql", "runtime-tokio"] }
 testcontainers = "0.27"

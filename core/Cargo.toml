@@ -14,7 +14,7 @@ bcrypt.workspace = true
 chrono.workspace = true
 kubetsu.workspace = true
 fake.workspace = true
-mockall = { version = "0.13", optional = true }
+mockall = { version = "0.14", optional = true }
 serde.workspace = true
 thiserror.workspace = true
 time.workspace = true
