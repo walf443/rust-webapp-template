@@ -9,7 +9,7 @@ axum = { version = "0.8", features = ["tracing"] }
 axum-extra = { version = "0.10", features = ["cookie-signed", "cookie-key-expansion", "typed-header"] }
 async-trait = "0.1"
 base64 = "0.21"
-bcrypt = "0.15"
+bcrypt = "0.19"
 chrono = { version = "0.4", features = ["serde"] }
 hyper = "0.14"
 listenfd = "1"
