@@ -16,7 +16,7 @@ listenfd = "1"
 num-traits = "0.2"
 serde = { version = "1", features = ["derive"] }
 sha2 = "0.10"
-thiserror = "1"
+thiserror = "2"
 time = "0.3"
 tokio = { version = "1", features = ["macros", "rt-multi-thread", "process", "fs"] }
 tokio-util = { version = "0.7", features = ["io"] }
