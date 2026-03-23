@@ -5,6 +5,8 @@ on:
 
 env:
   PROJECT_NAME: test-project
+  CARGO_INCREMENTAL: 0
+  CARGO_TERM_COLOR: always
 
 jobs:
   generate:
@@ -39,7 +41,7 @@ jobs:
         working-directory: ${{ env.PROJECT_NAME }}
         run: cargo fmt --all -- --check
 
-  clippy:
+  clippy-and-test:
     needs: generate
     runs-on: ubuntu-latest
     steps:
@@ -52,20 +54,13 @@ jobs:
           name: generated-project
           path: ${{ env.PROJECT_NAME }}
 
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: ${{ env.PROJECT_NAME }}
+
       - name: cargo clippy
         working-directory: ${{ env.PROJECT_NAME }}
         run: cargo clippy --all-targets -- -D warnings
-
-  test:
-    needs: generate
-    runs-on: ubuntu-latest
-    steps:
-      - uses: dtolnay/rust-toolchain@stable
-
-      - uses: actions/download-artifact@v8
-        with:
-          name: generated-project
-          path: ${{ env.PROJECT_NAME }}
 
       - name: cargo test
         working-directory: ${{ env.PROJECT_NAME }}
