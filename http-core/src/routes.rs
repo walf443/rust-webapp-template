@@ -8,3 +8,15 @@ pub mod user_routes;
 pub fn routes<S: ServiceManager + 'static>() -> Router<AppState<S>> {
     axum::Router::new().nest("/api/user/", user_routes())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::test_helper::{TestServiceManager, make_test_state};
+
+    #[test]
+    fn router_builds_without_panic() {
+        let (state, _) = make_test_state(TestServiceManager);
+        let _app: axum::Router = routes().with_state(state);
+    }
+}

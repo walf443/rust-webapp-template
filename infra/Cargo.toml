@@ -17,5 +17,6 @@ fake.workspace = true
 
 [dev-dependencies]
 {{ project-name }}-core = { path = "../core", features = ["test"]}
+ctor.workspace = true
 testcontainers.workspace = true
 testcontainers-modules.workspace = true

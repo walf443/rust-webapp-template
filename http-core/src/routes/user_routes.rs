@@ -7,10 +7,10 @@ use {{ crate_name }}_core::services::manager::ServiceManager;
 use {{ crate_name }}_core::services::user_service::UserService;
 
 pub fn user_routes<S: ServiceManager + 'static>() -> Router<AppState<S>> {
-    Router::new().route("/:username", axum::routing::get(get_user_handler::<S>))
+    Router::new().route("/{username}", axum::routing::get(get_user_handler::<S>))
 }
 
-// GET /api/user/:username
+// GET /api/user/{username}
 pub async fn get_user_handler<S: ServiceManager>(
     State(AppState { service, .. }): State<AppState<S>>,
     Path((username,)): Path<(String,)>,

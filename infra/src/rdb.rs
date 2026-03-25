@@ -88,24 +88,19 @@ pub(crate) fn sqlx_err(e: sqlx::Error) -> RDBError {
 }
 
 #[cfg(test)]
+static TEST_POOL: tokio::sync::OnceCell<MySqlRDBPool> = tokio::sync::OnceCell::const_new();
+
+#[cfg(test)]
+static TEST_CONTAINER: std::sync::Mutex<
+    Option<testcontainers::ContainerAsync<testcontainers_modules::mysql::Mysql>>,
+> = std::sync::Mutex::new(None);
+
+#[cfg(test)]
 pub(crate) async fn get_test_pool() -> MySqlRDBPool {
     use testcontainers::runners::AsyncRunner;
     use testcontainers_modules::mysql::Mysql;
-    use tokio::sync::OnceCell;
 
-    struct TestContext {
-        _container: testcontainers::ContainerAsync<Mysql>,
-        pool: MySqlRDBPool,
-    }
-
-    // Safety: Send is required for OnceCell but ContainerAsync may not impl Send
-    // in all versions. The container is only used to keep it alive.
-    unsafe impl Send for TestContext {}
-    unsafe impl Sync for TestContext {}
-
-    static TEST_CONTEXT: OnceCell<TestContext> = OnceCell::const_new();
-
-    let ctx = TEST_CONTEXT
+    TEST_POOL
         .get_or_init(|| async {
             let container = Mysql::default()
                 .with_init_sql(include_str!("../schema.sql").to_string().into_bytes())
@@ -127,14 +122,32 @@ pub(crate) async fn get_test_pool() -> MySqlRDBPool {
                 .await
                 .expect("Failed to connect to test MySQL");
 
-            TestContext {
-                _container: container,
-                pool: MySqlRDBPool::new(pool),
-            }
-        })
-        .await;
+            *TEST_CONTAINER
+                .lock()
+                .expect("TEST_CONTAINER mutex poisoned") = Some(container);
 
-    ctx.pool.clone()
+            MySqlRDBPool::new(pool)
+        })
+        .await
+        .clone()
+}
+
+#[cfg(test)]
+#[ctor::dtor]
+fn cleanup_test_container() {
+    let Some(container) = TEST_CONTAINER
+        .lock()
+        .ok()
+        .and_then(|mut guard| guard.take())
+    else {
+        return;
+    };
+    let Ok(rt) = tokio::runtime::Runtime::new() else {
+        return;
+    };
+    rt.block_on(async {
+        let _ = container.rm().await;
+    });
 }
 
 /// Database connection configuration from environment variables.
