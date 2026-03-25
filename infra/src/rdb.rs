@@ -144,7 +144,7 @@ fn cleanup_test_container() {
         return;
     };
     rt.block_on(async {
-        drop(container);
+        let _ = container.rm().await;
     });
 }
 
