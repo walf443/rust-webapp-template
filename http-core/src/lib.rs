@@ -8,6 +8,9 @@ pub mod responses;
 pub mod routes;
 pub mod state;
 
+#[cfg(test)]
+pub mod test_helper;
+
 pub const DEFAULT_SESSION_ID_KEY: &str = "SESSIONID";
 pub const DEFUALT_SESSION_EXPIRES_KEY: &str = "EXPIRES";
 
