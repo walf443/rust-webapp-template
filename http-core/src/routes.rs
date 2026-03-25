@@ -16,7 +16,7 @@ mod tests {
 
     #[test]
     fn router_builds_without_panic() {
-        let (state, _) = make_test_state(TestServiceManager::default());
+        let (state, _) = make_test_state(TestServiceManager);
         let _app: axum::Router = routes().with_state(state);
     }
 }

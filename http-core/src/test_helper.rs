@@ -1,11 +1,11 @@
 use crate::state::AppState;
+use async_trait::async_trait;
 use {{ crate_name }}_core::models::user::{CreateUser, User, UserId};
+use {{ crate_name }}_core::services::ServiceResult;
 use {{ crate_name }}_core::services::manager::ServiceManager;
 use {{ crate_name }}_core::services::user_service::{HaveUserService, UserService};
-use {{ crate_name }}_core::services::ServiceResult;
-use async_trait::async_trait;
 
-#[derive(Clone, Default)]
+#[derive(Clone)]
 pub struct TestUserService;
 
 #[async_trait]
@@ -21,7 +21,7 @@ impl UserService for TestUserService {
     }
 }
 
-#[derive(Clone, Default)]
+#[derive(Clone)]
 pub struct TestServiceManager;
 
 impl HaveUserService for TestServiceManager {
@@ -33,7 +33,9 @@ impl HaveUserService for TestServiceManager {
 
 impl ServiceManager for TestServiceManager {}
 
-pub fn make_test_state<S: ServiceManager>(service: S) -> (AppState<S>, axum_extra::extract::cookie::Key) {
+pub fn make_test_state<S: ServiceManager>(
+    service: S,
+) -> (AppState<S>, axum_extra::extract::cookie::Key) {
     let secret = b"test-secret-key-that-is-long-enough-for-derive";
     let key = axum_extra::extract::cookie::Key::derive_from(secret);
     let state = AppState {
