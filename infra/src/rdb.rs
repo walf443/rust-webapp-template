@@ -133,12 +133,19 @@ pub(crate) async fn get_test_pool() -> MySqlRDBPool {
 #[cfg(test)]
 #[ctor::dtor]
 fn cleanup_test_container() {
-    if let Some(container) = TEST_CONTAINER.lock().unwrap().take() {
-        let rt = tokio::runtime::Runtime::new().unwrap();
-        rt.block_on(async {
-            drop(container);
-        });
-    }
+    let Some(container) = TEST_CONTAINER
+        .lock()
+        .ok()
+        .and_then(|mut guard| guard.take())
+    else {
+        return;
+    };
+    let Ok(rt) = tokio::runtime::Runtime::new() else {
+        return;
+    };
+    rt.block_on(async {
+        drop(container);
+    });
 }
 
 /// Database connection configuration from environment variables.
