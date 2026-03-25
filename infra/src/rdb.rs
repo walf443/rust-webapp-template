@@ -122,7 +122,7 @@ pub(crate) async fn get_test_pool() -> MySqlRDBPool {
                 .await
                 .expect("Failed to connect to test MySQL");
 
-            *TEST_CONTAINER.lock().unwrap() = Some(container);
+            *TEST_CONTAINER.lock().expect("TEST_CONTAINER mutex poisoned") = Some(container);
 
             MySqlRDBPool::new(pool)
         })
