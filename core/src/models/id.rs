@@ -1,1 +1,3 @@
-kubetsu::define_id!(pub struct Id<T, U>;);
+kubetsu::define_id!(
+    pub struct Id<T, U>;
+);
