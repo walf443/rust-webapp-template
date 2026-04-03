@@ -13,6 +13,10 @@ async-trait.workspace = true
 bcrypt.workspace = true
 chrono.workspace = true
 kubetsu.workspace = true
+kubetsu-fake.workspace = true
+kubetsu-serde.workspace = true
+kubetsu-sqlx.workspace = true
+sqlx.workspace = true
 fake.workspace = true
 mockall = { version = "0.14", optional = true }
 serde.workspace = true
