@@ -12,7 +12,7 @@ pub mod state;
 pub mod test_helper;
 
 pub const DEFAULT_SESSION_ID_KEY: &str = "SESSIONID";
-pub const DEFUALT_SESSION_EXPIRES_KEY: &str = "EXPIRES";
+pub const DEFAULT_SESSION_EXPIRES_KEY: &str = "EXPIRES";
 
 pub const DEFAULT_USER_ID_KEY: &str = "USERID";
 pub const DEFAULT_USERNAME_KEY: &str = "USERNAME";
@@ -27,7 +27,7 @@ pub async fn verify_user_session(jar: &SignedCookieJar) -> Result<(), Error> {
         .await?
         .ok_or(Error::Forbidden("".into()))?;
     let session_expires: i64 = sess
-        .get(DEFUALT_SESSION_EXPIRES_KEY)
+        .get(DEFAULT_SESSION_EXPIRES_KEY)
         .ok_or(Error::Forbidden("".into()))?;
     let now = Utc::now();
     if now.timestamp() > session_expires {
