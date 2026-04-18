@@ -9,15 +9,12 @@ publish = false
 {{ project-name }}-usecase = { path = "../usecase" }
 
 async-trait.workspace = true
-serde.workspace = true
 sqlx.workspace = true
-thiserror.workspace = true
-time.workspace = true
-tokio.workspace = true
-fake.workspace = true
 
 [dev-dependencies]
 {{ project-name }}-core = { path = "../core", features = ["test"]}
 ctor.workspace = true
+fake.workspace = true
 testcontainers.workspace = true
 testcontainers-modules.workspace = true
+tokio.workspace = true
