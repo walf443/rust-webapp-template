@@ -1,3 +1,3 @@
-use crate::user_usecase::HaveUserUsecase;
+use crate::user::HaveUserUsecases;
 
-pub trait UsecaseManager: Send + Sync + Clone + HaveUserUsecase {}
+pub trait UsecaseManager: Send + Sync + Clone + HaveUserUsecases {}

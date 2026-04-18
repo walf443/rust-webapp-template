@@ -2,7 +2,7 @@ use {{ crate_name }}_domain::repos::ReposError;
 use thiserror::Error;
 
 pub mod manager;
-pub mod user_usecase;
+pub mod user;
 
 #[cfg(test)]
 mod test_helper;

@@ -1,25 +1,25 @@
-use crate::usecase::user_usecase::UserUsecaseInfra;
+use crate::usecase::user::UserUsecasesInfra;
 use {{ crate_name }}_usecase::manager::UsecaseManager;
-use {{ crate_name }}_usecase::user_usecase::HaveUserUsecase;
+use {{ crate_name }}_usecase::user::HaveUserUsecases;
 
 #[derive(Clone)]
 pub struct UsecaseManagerInfra {
-    user_usecase: UserUsecaseInfra,
+    user: UserUsecasesInfra,
 }
 
 impl UsecaseManagerInfra {
     pub fn new(db_pool: crate::rdb::MySqlRDBPool) -> Self {
         Self {
-            user_usecase: UserUsecaseInfra::new(db_pool.clone()),
+            user: UserUsecasesInfra::new(db_pool.clone()),
         }
     }
 }
 
-impl HaveUserUsecase for UsecaseManagerInfra {
-    type Usecase = UserUsecaseInfra;
+impl HaveUserUsecases for UsecaseManagerInfra {
+    type User = UserUsecasesInfra;
 
-    fn user_usecase(&self) -> &Self::Usecase {
-        &self.user_usecase
+    fn user(&self) -> &Self::User {
+        &self.user
     }
 }
 

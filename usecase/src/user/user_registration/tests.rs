@@ -1,5 +1,5 @@
 use crate::test_helper::MockRepositoryManager;
-use crate::user_usecase::UserUsecase;
+use crate::user::user_registration::UserRegistrationUsecase;
 use fake::{Fake, Faker};
 use {{ crate_name }}_domain::models::user::{CreateUser, UserId};
 use {{ crate_name }}_domain::repos::ReposError::TestError;
@@ -16,7 +16,7 @@ async fn user_repo_create_fail() {
         .withf(move |_, u| u == &got_user)
         .returning(move |_, _| Err(TestError));
 
-    let result = usecase.create(&user).await;
+    let result = usecase.register_user(&user).await;
     assert!(result.is_err())
 }
 
@@ -39,6 +39,6 @@ async fn success_case() {
         .expect_hash_password()
         .returning(|_| Ok(Faker.fake()));
 
-    let u = usecase.create(&user).await.unwrap();
+    let u = usecase.register_user(&user).await.unwrap();
     assert_eq!(u.id, expect_user_id)
 }
