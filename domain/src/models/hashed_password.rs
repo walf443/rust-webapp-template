@@ -1,4 +1,3 @@
-use fake::Dummy;
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -7,7 +6,8 @@ pub enum PasswordHashError {
     HashFailed(#[from] bcrypt::BcryptError),
 }
 
-#[derive(Debug, Clone, PartialEq, Dummy)]
+#[derive(Debug, Clone, PartialEq)]
+#[cfg_attr(any(feature = "test", test), derive(fake::Dummy))]
 pub struct HashedPassword(String);
 
 impl HashedPassword {

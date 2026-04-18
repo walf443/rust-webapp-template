@@ -9,9 +9,15 @@ async fn user_repo_create_fail() {
     let mut usecase = MockRepositoryManager::new();
     let input: RegisterUserInput = Faker.fake();
 
+    let expected = input.clone();
     usecase
         .mock_user_repo
         .expect_create()
+        .withf(move |_, u| {
+            u.name == expected.name
+                && u.display_name == expected.display_name
+                && u.description == expected.description
+        })
         .returning(move |_, _| Err(TestError));
 
     let result = usecase.register_user(&input).await;
@@ -25,9 +31,15 @@ async fn success_case() {
 
     let expect_user_id: UserId = Faker.fake();
     let uid = expect_user_id.clone();
+    let expected = input.clone();
     usecase
         .mock_user_repo
         .expect_create()
+        .withf(move |_, u| {
+            u.name == expected.name
+                && u.display_name == expected.display_name
+                && u.description == expected.description
+        })
         .returning(move |_, _| Ok(uid.clone()));
 
     let u = usecase.register_user(&input).await.unwrap();

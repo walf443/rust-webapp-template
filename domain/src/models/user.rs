@@ -14,7 +14,8 @@ pub type UserId = Id<User, i64>;
 
 pub type UserName = Id<User, String>;
 
-#[derive(Debug, Dummy, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone)]
+#[cfg_attr(any(feature = "test", test), derive(fake::Dummy))]
 pub struct CreateUser {
     pub name: String,
     pub display_name: String,
