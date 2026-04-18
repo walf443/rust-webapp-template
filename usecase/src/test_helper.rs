@@ -1,7 +1,6 @@
 use crate::user_usecase::UserUsecaseImpl;
 use {{ crate_name }}_core::rdb::test_utils::MockRDBPool;
 use {{ crate_name }}_core::rdb::{HaveRDBPool, RDBPool};
-use {{ crate_name }}_core::repos::manager::RepositoryManager;
 use {{ crate_name }}_core::repos::user_repository::{HaveUserRepository, MockUserRepository};
 
 pub(crate) struct MockRepositoryManager {
@@ -38,5 +37,4 @@ impl HaveUserRepository for MockRepositoryManager {
     }
 }
 
-impl RepositoryManager for MockRepositoryManager {}
 impl UserUsecaseImpl for MockRepositoryManager {}
