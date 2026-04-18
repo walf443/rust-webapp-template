@@ -1,7 +1,7 @@
 use crate::routes::user_routes::user_routes;
 use crate::state::AppState;
 use axum::Router;
-use {{ crate_name }}_core::usecases::manager::UsecaseManager;
+use {{ crate_name }}_usecase::manager::UsecaseManager;
 
 pub mod user_routes;
 

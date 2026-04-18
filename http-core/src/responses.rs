@@ -1,7 +1,7 @@
 pub mod user_response;
 
 use {{ crate_name }}_core::repos;
-use {{ crate_name }}_core::usecases::UsecaseError;
+use {{ crate_name }}_usecase::UsecaseError;
 
 #[derive(Debug, thiserror::Error)]
 pub enum ResponseError {

@@ -1,4 +1,4 @@
-use {{ crate_name }}_core::usecases::manager::UsecaseManager;
+use {{ crate_name }}_usecase::manager::UsecaseManager;
 
 #[derive(Clone)]
 pub struct AppState<S: UsecaseManager> {

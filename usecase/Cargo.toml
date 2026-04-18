@@ -1,0 +1,21 @@
+[package]
+name = "{{ project-name }}-usecase"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[features]
+default = []
+test = ["mockall", "{{ project-name }}-core/test"]
+
+[dependencies]
+{{ project-name }}-core = { path = "../core" }
+
+async-trait.workspace = true
+mockall = { version = "0.14", optional = true }
+thiserror.workspace = true
+tokio.workspace = true
+
+[dev-dependencies]
+{{ project-name }}-core = { path = "../core", features = ["test"] }
+fake.workspace = true

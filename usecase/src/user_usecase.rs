@@ -1,11 +1,11 @@
 #[cfg(test)]
 mod create;
 
-use crate::models::user::{CreateUser, User, UserId, UserName};
-use crate::rdb::HaveRDBPool;
-use crate::repos::user_repository::{HaveUserRepository, UserRepository};
-use crate::usecases::UsecaseResult;
+use crate::UsecaseResult;
 use async_trait::async_trait;
+use {{ crate_name }}_core::models::user::{CreateUser, User, UserId, UserName};
+use {{ crate_name }}_core::rdb::HaveRDBPool;
+use {{ crate_name }}_core::repos::user_repository::{HaveUserRepository, UserRepository};
 
 #[async_trait]
 pub trait UserUsecase {

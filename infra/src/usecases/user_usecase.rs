@@ -1,7 +1,7 @@
 use crate::repos::user_repository::UserRepositoryInfra;
 use {{ crate_name }}_core::rdb::{HaveRDBPool, RDBPool};
 use {{ crate_name }}_core::repos::user_repository::HaveUserRepository;
-use {{ crate_name }}_core::usecases::user_usecase::UserUsecaseImpl;
+use {{ crate_name }}_usecase::user_usecase::UserUsecaseImpl;
 
 #[derive(Clone)]
 pub struct UserUsecaseInfra {

@@ -3,7 +3,7 @@ use std::borrow::Cow;
 use crate::responses::ResponseError;
 use axum::http::StatusCode;
 use {{ crate_name }}_core::repos::ReposError;
-use {{ crate_name }}_core::usecases::UsecaseError;
+use {{ crate_name }}_usecase::UsecaseError;
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {

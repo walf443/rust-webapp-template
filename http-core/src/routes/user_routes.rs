@@ -3,8 +3,8 @@ use crate::responses::user_response::UserResponse;
 use crate::state::AppState;
 use axum::Router;
 use axum::extract::{Path, State};
-use {{ crate_name }}_core::usecases::manager::UsecaseManager;
-use {{ crate_name }}_core::usecases::user_usecase::UserUsecase;
+use {{ crate_name }}_usecase::manager::UsecaseManager;
+use {{ crate_name }}_usecase::user_usecase::UserUsecase;
 
 pub fn user_routes<S: UsecaseManager + 'static>() -> Router<AppState<S>> {
     Router::new().route("/{username}", axum::routing::get(get_user_handler::<S>))
