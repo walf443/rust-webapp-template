@@ -4,9 +4,9 @@ use {{ crate_name }}_core::rdb::{HaveRDBPool, RDBPool};
 use {{ crate_name }}_core::repos::manager::RepositoryManager;
 use {{ crate_name }}_core::repos::user_repository::{HaveUserRepository, MockUserRepository};
 
-pub struct MockRepositoryManager {
+pub(crate) struct MockRepositoryManager {
     db_pool: MockRDBPool,
-    pub mock_user_repo: MockUserRepository,
+    pub(crate) mock_user_repo: MockUserRepository,
 }
 
 impl Default for MockRepositoryManager {
@@ -19,7 +19,7 @@ impl Default for MockRepositoryManager {
 }
 
 impl MockRepositoryManager {
-    pub fn new() -> Self {
+    pub(crate) fn new() -> Self {
         Self::default()
     }
 }

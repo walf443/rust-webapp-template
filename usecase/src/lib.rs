@@ -4,8 +4,8 @@ use thiserror::Error;
 pub mod manager;
 pub mod user_usecase;
 
-#[cfg(any(feature = "test", test))]
-pub mod test_helper;
+#[cfg(test)]
+mod test_helper;
 
 #[derive(Error, Debug)]
 pub enum UsecaseError {
