@@ -1,9 +1,9 @@
 use crate::repos::user_repository::UserRepositoryInfra;
 use {{ crate_name }}_domain::rdb::{HaveRDBPool, RDBPool};
 use {{ crate_name }}_domain::repos::user_repository::HaveUserRepository;
-use {{ crate_name }}_usecase::user::find_user::FindUserUsecaseImpl;
-use {{ crate_name }}_usecase::user::find_user_by_name::FindUserByNameUsecaseImpl;
-use {{ crate_name }}_usecase::user::user_registration::UserRegistrationUsecaseImpl;
+use {{ crate_name }}_usecase::user::{
+    FindUserByNameUsecaseImpl, FindUserUsecaseImpl, UserRegistrationUsecaseImpl,
+};
 
 #[derive(Clone)]
 pub struct UserUsecasesInfra {

@@ -1,6 +1,4 @@
-use crate::user::find_user::FindUserUsecaseImpl;
-use crate::user::find_user_by_name::FindUserByNameUsecaseImpl;
-use crate::user::user_registration::UserRegistrationUsecaseImpl;
+use crate::user::{FindUserByNameUsecaseImpl, FindUserUsecaseImpl, UserRegistrationUsecaseImpl};
 use {{ crate_name }}_domain::rdb::test_utils::MockRDBPool;
 use {{ crate_name }}_domain::rdb::{HaveRDBPool, RDBPool};
 use {{ crate_name }}_domain::repos::user_repository::{HaveUserRepository, MockUserRepository};

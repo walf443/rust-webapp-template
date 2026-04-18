@@ -2,9 +2,9 @@ pub mod find_user;
 pub mod find_user_by_name;
 pub mod user_registration;
 
-pub use find_user::FindUserUsecase;
-pub use find_user_by_name::FindUserByNameUsecase;
-pub use user_registration::UserRegistrationUsecase;
+pub use find_user::{FindUserUsecase, FindUserUsecaseImpl};
+pub use find_user_by_name::{FindUserByNameUsecase, FindUserByNameUsecaseImpl};
+pub use user_registration::{UserRegistrationUsecase, UserRegistrationUsecaseImpl};
 
 pub trait HaveUserUsecases {
     type User: FindUserUsecase + FindUserByNameUsecase + UserRegistrationUsecase;
