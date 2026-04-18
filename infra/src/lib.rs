@@ -1,4 +1,4 @@
 pub mod rdb;
 pub mod repos;
 pub(crate) mod rows;
-pub mod services;
+pub mod usecases;

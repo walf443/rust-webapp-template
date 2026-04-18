@@ -1,7 +1,7 @@
 pub mod user_response;
 
 use {{ crate_name }}_core::repos;
-use {{ crate_name }}_core::services::ServiceError;
+use {{ crate_name }}_core::usecases::UsecaseError;
 
 #[derive(Debug, thiserror::Error)]
 pub enum ResponseError {
@@ -11,8 +11,8 @@ pub enum ResponseError {
     Io(#[from] std::io::Error),
     #[error("Repos error: {0}")]
     Repos(#[from] repos::ReposError),
-    #[error("Service error: {0}")]
-    Service(#[from] ServiceError),
+    #[error("Usecase error: {0}")]
+    Usecase(#[from] UsecaseError),
 }
 
 pub type ResponseResult<T> = Result<T, ResponseError>;

@@ -2,14 +2,14 @@ use crate::repos::ReposError;
 use thiserror::Error;
 
 pub mod manager;
-pub mod user_service;
+pub mod user_usecase;
 
 #[derive(Error, Debug)]
-pub enum ServiceError {
+pub enum UsecaseError {
     #[error("repos error: #{0}")]
     ReposError(#[from] ReposError),
     #[error("rdb error: #{0}")]
     RDBError(#[from] crate::rdb::RDBError),
 }
 
-pub type ServiceResult<T> = Result<T, ServiceError>;
+pub type UsecaseResult<T> = Result<T, UsecaseError>;
