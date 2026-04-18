@@ -1,6 +1,6 @@
 use crate::responses::ResponseResult;
 use {{ crate_name }}_core::models::user::{User, UserId, UserName};
-use {{ crate_name }}_core::services::manager::ServiceManager;
+use {{ crate_name }}_core::usecases::manager::UsecaseManager;
 
 #[derive(Debug, serde::Serialize)]
 pub struct UserResponse {
@@ -13,8 +13,8 @@ pub struct UserResponse {
 }
 
 impl UserResponse {
-    pub async fn build_by_service<S: ServiceManager>(
-        _service: &S,
+    pub async fn build_by_usecase<S: UsecaseManager>(
+        _usecase: &S,
         user: &User,
     ) -> ResponseResult<Self> {
         Ok(Self {

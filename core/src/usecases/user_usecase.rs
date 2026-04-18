@@ -4,27 +4,27 @@ mod create;
 use crate::models::user::{CreateUser, User, UserId, UserName};
 use crate::rdb::HaveRDBPool;
 use crate::repos::user_repository::{HaveUserRepository, UserRepository};
-use crate::services::ServiceResult;
+use crate::usecases::UsecaseResult;
 use async_trait::async_trait;
 
 #[async_trait]
-pub trait UserService {
-    async fn create(&self, user: &CreateUser) -> ServiceResult<User>;
-    async fn find(&self, id: &UserId) -> ServiceResult<Option<User>>;
-    async fn find_by_name(&self, name: &str) -> ServiceResult<Option<User>>;
+pub trait UserUsecase {
+    async fn create(&self, user: &CreateUser) -> UsecaseResult<User>;
+    async fn find(&self, id: &UserId) -> UsecaseResult<Option<User>>;
+    async fn find_by_name(&self, name: &str) -> UsecaseResult<Option<User>>;
 }
 
-pub trait HaveUserService {
-    type Service: UserService;
+pub trait HaveUserUsecase {
+    type Usecase: UserUsecase;
 
-    fn user_service(&self) -> &Self::Service;
+    fn user_usecase(&self) -> &Self::Usecase;
 }
 
-pub trait UserServiceImpl: Sync + HaveRDBPool + HaveUserRepository {}
+pub trait UserUsecaseImpl: Sync + HaveRDBPool + HaveUserRepository {}
 
 #[async_trait]
-impl<T: UserServiceImpl> UserService for T {
-    async fn create(&self, user: &CreateUser) -> ServiceResult<User> {
+impl<T: UserUsecaseImpl> UserUsecase for T {
+    async fn create(&self, user: &CreateUser) -> UsecaseResult<User> {
         let mut tx = self.get_rdb_pool().begin().await?;
 
         let user_id = self.user_repo().create(&mut tx, user).await?;
@@ -40,13 +40,13 @@ impl<T: UserServiceImpl> UserService for T {
         })
     }
 
-    async fn find(&self, id: &UserId) -> ServiceResult<Option<User>> {
+    async fn find(&self, id: &UserId) -> UsecaseResult<Option<User>> {
         let mut conn = self.get_rdb_pool().acquire().await?;
         let user = self.user_repo().find(&mut conn, id).await?;
         Ok(user)
     }
 
-    async fn find_by_name(&self, name: &str) -> ServiceResult<Option<User>> {
+    async fn find_by_name(&self, name: &str) -> UsecaseResult<Option<User>> {
         let mut conn = self.get_rdb_pool().acquire().await?;
         let user = self.user_repo().find_by_name(&mut conn, name).await?;
         Ok(user)

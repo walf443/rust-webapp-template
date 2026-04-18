@@ -9,7 +9,7 @@ pub mod tests {
     use crate::rdb::{HaveRDBPool, RDBPool};
     use crate::repos::manager::RepositoryManager;
     use crate::repos::user_repository::{HaveUserRepository, MockUserRepository};
-    use crate::services::user_service::UserServiceImpl;
+    use crate::usecases::user_usecase::UserUsecaseImpl;
 
     pub struct MockRepositoryManager {
         db_pool: MockRDBPool,
@@ -46,5 +46,5 @@ pub mod tests {
     }
 
     impl RepositoryManager for MockRepositoryManager {}
-    impl UserServiceImpl for MockRepositoryManager {}
+    impl UserUsecaseImpl for MockRepositoryManager {}
 }

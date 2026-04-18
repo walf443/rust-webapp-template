@@ -3,7 +3,7 @@ use std::borrow::Cow;
 use crate::responses::ResponseError;
 use axum::http::StatusCode;
 use {{ crate_name }}_core::repos::ReposError;
-use {{ crate_name }}_core::services::ServiceError;
+use {{ crate_name }}_core::usecases::UsecaseError;
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
@@ -33,11 +33,11 @@ pub enum Error {
     InternalServerError(String),
 }
 
-impl From<ServiceError> for Error {
-    fn from(err: ServiceError) -> Self {
+impl From<UsecaseError> for Error {
+    fn from(err: UsecaseError) -> Self {
         match err {
-            ServiceError::ReposError(e) => Self::ReposError(e),
-            ServiceError::RDBError(e) => Self::RDB(e),
+            UsecaseError::ReposError(e) => Self::ReposError(e),
+            UsecaseError::RDBError(e) => Self::RDB(e),
         }
     }
 }
