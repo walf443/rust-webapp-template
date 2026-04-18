@@ -1,4 +1,4 @@
-use crate::user_usecase::UserUsecaseImpl;
+use crate::user::{FindUserByNameUsecaseImpl, FindUserUsecaseImpl, UserRegistrationUsecaseImpl};
 use {{ crate_name }}_domain::rdb::test_utils::MockRDBPool;
 use {{ crate_name }}_domain::rdb::{HaveRDBPool, RDBPool};
 use {{ crate_name }}_domain::repos::user_repository::{HaveUserRepository, MockUserRepository};
@@ -37,4 +37,6 @@ impl HaveUserRepository for MockRepositoryManager {
     }
 }
 
-impl UserUsecaseImpl for MockRepositoryManager {}
+impl FindUserUsecaseImpl for MockRepositoryManager {}
+impl FindUserByNameUsecaseImpl for MockRepositoryManager {}
+impl UserRegistrationUsecaseImpl for MockRepositoryManager {}

@@ -1,15 +1,17 @@
 use crate::repos::user_repository::UserRepositoryInfra;
 use {{ crate_name }}_domain::rdb::{HaveRDBPool, RDBPool};
 use {{ crate_name }}_domain::repos::user_repository::HaveUserRepository;
-use {{ crate_name }}_usecase::user_usecase::UserUsecaseImpl;
+use {{ crate_name }}_usecase::user::{
+    FindUserByNameUsecaseImpl, FindUserUsecaseImpl, UserRegistrationUsecaseImpl,
+};
 
 #[derive(Clone)]
-pub struct UserUsecaseInfra {
+pub struct UserUsecasesInfra {
     db_pool: crate::rdb::MySqlRDBPool,
     user_repo: UserRepositoryInfra,
 }
 
-impl UserUsecaseInfra {
+impl UserUsecasesInfra {
     pub fn new(db_pool: crate::rdb::MySqlRDBPool) -> Self {
         Self {
             db_pool,
@@ -18,13 +20,13 @@ impl UserUsecaseInfra {
     }
 }
 
-impl HaveRDBPool for UserUsecaseInfra {
+impl HaveRDBPool for UserUsecasesInfra {
     fn get_rdb_pool(&self) -> &dyn RDBPool {
         &self.db_pool
     }
 }
 
-impl HaveUserRepository for UserUsecaseInfra {
+impl HaveUserRepository for UserUsecasesInfra {
     type Repo = UserRepositoryInfra;
 
     fn user_repo(&self) -> &Self::Repo {
@@ -32,4 +34,6 @@ impl HaveUserRepository for UserUsecaseInfra {
     }
 }
 
-impl UserUsecaseImpl for UserUsecaseInfra {}
+impl FindUserUsecaseImpl for UserUsecasesInfra {}
+impl FindUserByNameUsecaseImpl for UserUsecasesInfra {}
+impl UserRegistrationUsecaseImpl for UserUsecasesInfra {}

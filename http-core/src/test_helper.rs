@@ -3,31 +3,41 @@ use async_trait::async_trait;
 use {{ crate_name }}_domain::models::user::{CreateUser, User, UserId};
 use {{ crate_name }}_usecase::UsecaseResult;
 use {{ crate_name }}_usecase::manager::UsecaseManager;
-use {{ crate_name }}_usecase::user_usecase::{HaveUserUsecase, UserUsecase};
+use {{ crate_name }}_usecase::user::{
+    FindUserByNameUsecase, FindUserUsecase, HaveUserUsecases, UserRegistrationUsecase,
+};
 
 #[derive(Clone)]
-pub struct TestUserUsecase;
+pub struct TestUserUsecases;
 
 #[async_trait]
-impl UserUsecase for TestUserUsecase {
-    async fn create(&self, _user: &CreateUser) -> UsecaseResult<User> {
+impl FindUserUsecase for TestUserUsecases {
+    async fn find_user(&self, _id: &UserId) -> UsecaseResult<Option<User>> {
         unimplemented!()
     }
-    async fn find(&self, _id: &UserId) -> UsecaseResult<Option<User>> {
-        unimplemented!()
-    }
-    async fn find_by_name(&self, _name: &str) -> UsecaseResult<Option<User>> {
+}
+
+#[async_trait]
+impl FindUserByNameUsecase for TestUserUsecases {
+    async fn find_user_by_name(&self, _name: &str) -> UsecaseResult<Option<User>> {
         Ok(None)
+    }
+}
+
+#[async_trait]
+impl UserRegistrationUsecase for TestUserUsecases {
+    async fn register_user(&self, _user: &CreateUser) -> UsecaseResult<User> {
+        unimplemented!()
     }
 }
 
 #[derive(Clone)]
 pub struct TestUsecaseManager;
 
-impl HaveUserUsecase for TestUsecaseManager {
-    type Usecase = TestUserUsecase;
-    fn user_usecase(&self) -> &Self::Usecase {
-        &TestUserUsecase
+impl HaveUserUsecases for TestUsecaseManager {
+    type User = TestUserUsecases;
+    fn user(&self) -> &Self::User {
+        &TestUserUsecases
     }
 }
 

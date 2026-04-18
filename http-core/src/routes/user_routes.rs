@@ -4,7 +4,7 @@ use crate::state::AppState;
 use axum::Router;
 use axum::extract::{Path, State};
 use {{ crate_name }}_usecase::manager::UsecaseManager;
-use {{ crate_name }}_usecase::user_usecase::UserUsecase;
+use {{ crate_name }}_usecase::user::FindUserByNameUsecase;
 
 pub fn user_routes<S: UsecaseManager + 'static>() -> Router<AppState<S>> {
     Router::new().route("/{username}", axum::routing::get(get_user_handler::<S>))
@@ -16,8 +16,8 @@ pub async fn get_user_handler<S: UsecaseManager>(
     Path((username,)): Path<(String,)>,
 ) -> Result<axum::Json<UserResponse>, Error> {
     let user_model = usecase
-        .user_usecase()
-        .find_by_name(&username)
+        .user()
+        .find_user_by_name(&username)
         .await?
         .ok_or(Error::NotFound(
             "not found user that has the given username".into(),
