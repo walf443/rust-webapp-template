@@ -3,9 +3,9 @@ mod create;
 
 use crate::UsecaseResult;
 use async_trait::async_trait;
-use {{ crate_name }}_core::models::user::{CreateUser, User, UserId, UserName};
-use {{ crate_name }}_core::rdb::HaveRDBPool;
-use {{ crate_name }}_core::repos::user_repository::{HaveUserRepository, UserRepository};
+use {{ crate_name }}_domain::models::user::{CreateUser, User, UserId, UserName};
+use {{ crate_name }}_domain::rdb::HaveRDBPool;
+use {{ crate_name }}_domain::repos::user_repository::{HaveUserRepository, UserRepository};
 
 #[async_trait]
 pub trait UserUsecase {

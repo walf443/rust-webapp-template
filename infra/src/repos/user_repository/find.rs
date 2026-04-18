@@ -1,8 +1,8 @@
 use crate::repos::user_repository::UserRepositoryInfra;
 use fake::{Fake, Faker};
-use {{ crate_name }}_core::models::user::{User, UserId};
-use {{ crate_name }}_core::rdb::RDBPool;
-use {{ crate_name }}_core::repos::user_repository::UserRepository;
+use {{ crate_name }}_domain::models::user::{User, UserId};
+use {{ crate_name }}_domain::rdb::RDBPool;
+use {{ crate_name }}_domain::repos::user_repository::UserRepository;
 
 #[tokio::test]
 async fn found_case() {

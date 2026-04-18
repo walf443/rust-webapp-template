@@ -5,7 +5,7 @@ use std::pin::Pin;
 use sqlx::mysql::MySql;
 use sqlx::pool::PoolConnection;
 use sqlx::{MySqlConnection, MySqlPool};
-use {{ crate_name }}_core::rdb::{RDBConnection, RDBConnectionInner, RDBError, RDBPool};
+use {{ crate_name }}_domain::rdb::{RDBConnection, RDBConnectionInner, RDBError, RDBPool};
 
 /// Wrapper around sqlx PoolConnection for the RDBConnectionInner trait.
 struct MySqlPooledConnection(PoolConnection<MySql>);

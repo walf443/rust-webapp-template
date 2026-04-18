@@ -2,7 +2,7 @@ use std::borrow::Cow;
 
 use crate::responses::ResponseError;
 use axum::http::StatusCode;
-use {{ crate_name }}_core::repos::ReposError;
+use {{ crate_name }}_domain::repos::ReposError;
 use {{ crate_name }}_usecase::UsecaseError;
 
 #[derive(Debug, thiserror::Error)]
@@ -10,7 +10,7 @@ pub enum Error {
     #[error("I/O error: {0}")]
     Io(#[from] std::io::Error),
     #[error("DB error: {0}")]
-    RDB(#[from] {{ crate_name }}_core::rdb::RDBError),
+    RDB(#[from] {{ crate_name }}_domain::rdb::RDBError),
     #[error("Repos error: {0}")]
     ReposError(#[from] ReposError),
     #[error("response error: {0}")]

@@ -1,4 +1,4 @@
-use {{ crate_name }}_core::models::user::{User, UserId, UserName};
+use {{ crate_name }}_domain::models::user::{User, UserId, UserName};
 
 #[derive(Debug, sqlx::FromRow)]
 pub(crate) struct UserRow {

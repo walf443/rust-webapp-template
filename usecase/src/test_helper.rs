@@ -1,7 +1,7 @@
 use crate::user_usecase::UserUsecaseImpl;
-use {{ crate_name }}_core::rdb::test_utils::MockRDBPool;
-use {{ crate_name }}_core::rdb::{HaveRDBPool, RDBPool};
-use {{ crate_name }}_core::repos::user_repository::{HaveUserRepository, MockUserRepository};
+use {{ crate_name }}_domain::rdb::test_utils::MockRDBPool;
+use {{ crate_name }}_domain::rdb::{HaveRDBPool, RDBPool};
+use {{ crate_name }}_domain::repos::user_repository::{HaveUserRepository, MockUserRepository};
 
 pub(crate) struct MockRepositoryManager {
     db_pool: MockRDBPool,
