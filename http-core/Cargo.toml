@@ -6,6 +6,7 @@ publish = false
 
 [dependencies]
 {{ project-name }}-core = { path = "../core" }
+{{ project-name }}-usecase = { path = "../usecase" }
 
 async-session.workspace = true
 axum-extra.workspace = true

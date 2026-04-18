@@ -1,6 +1,6 @@
 use crate::responses::ResponseResult;
 use {{ crate_name }}_core::models::user::{User, UserId, UserName};
-use {{ crate_name }}_core::usecases::manager::UsecaseManager;
+use {{ crate_name }}_usecase::manager::UsecaseManager;
 
 #[derive(Debug, serde::Serialize)]
 pub struct UserResponse {

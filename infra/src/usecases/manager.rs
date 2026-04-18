@@ -1,6 +1,6 @@
 use crate::usecases::user_usecase::UserUsecaseInfra;
-use {{ crate_name }}_core::usecases::manager::UsecaseManager;
-use {{ crate_name }}_core::usecases::user_usecase::HaveUserUsecase;
+use {{ crate_name }}_usecase::manager::UsecaseManager;
+use {{ crate_name }}_usecase::user_usecase::HaveUserUsecase;
 
 #[derive(Clone)]
 pub struct UsecaseManagerInfra {

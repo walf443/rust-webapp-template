@@ -1,9 +1,9 @@
 use crate::state::AppState;
 use async_trait::async_trait;
 use {{ crate_name }}_core::models::user::{CreateUser, User, UserId};
-use {{ crate_name }}_core::usecases::UsecaseResult;
-use {{ crate_name }}_core::usecases::manager::UsecaseManager;
-use {{ crate_name }}_core::usecases::user_usecase::{HaveUserUsecase, UserUsecase};
+use {{ crate_name }}_usecase::UsecaseResult;
+use {{ crate_name }}_usecase::manager::UsecaseManager;
+use {{ crate_name }}_usecase::user_usecase::{HaveUserUsecase, UserUsecase};
 
 #[derive(Clone)]
 pub struct TestUserUsecase;
