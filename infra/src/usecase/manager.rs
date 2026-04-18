@@ -1,4 +1,4 @@
-use crate::usecases::user_usecase::UserUsecaseInfra;
+use crate::usecase::user_usecase::UserUsecaseInfra;
 use {{ crate_name }}_usecase::manager::UsecaseManager;
 use {{ crate_name }}_usecase::user_usecase::HaveUserUsecase;
 
