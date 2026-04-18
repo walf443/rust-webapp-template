@@ -1,3 +1,4 @@
+use super::hashed_password::HashedPassword;
 use super::id::Id;
 use fake::Dummy;
 
@@ -7,17 +8,17 @@ pub struct User {
     pub name: UserName,
     pub display_name: Option<String>,
     pub description: Option<String>,
-    pub hashed_password: Option<String>,
 }
 
 pub type UserId = Id<User, i64>;
 
 pub type UserName = Id<User, String>;
 
-#[derive(Debug, Dummy, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone)]
+#[cfg_attr(any(feature = "test", test), derive(fake::Dummy))]
 pub struct CreateUser {
     pub name: String,
     pub display_name: String,
     pub description: String,
-    pub password: String,
+    pub password: HashedPassword,
 }

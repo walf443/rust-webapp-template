@@ -2,6 +2,7 @@ use std::borrow::Cow;
 
 use crate::responses::ResponseError;
 use axum::http::StatusCode;
+use {{ crate_name }}_domain::models::PasswordHashError;
 use {{ crate_name }}_domain::repos::ReposError;
 use {{ crate_name }}_usecase::UsecaseError;
 
@@ -38,6 +39,7 @@ impl From<UsecaseError> for Error {
         match err {
             UsecaseError::ReposError(e) => Self::ReposError(e),
             UsecaseError::RDBError(e) => Self::RDB(e),
+            UsecaseError::PasswordHash(PasswordHashError::HashFailed(e)) => Self::Bcrypt(e),
         }
     }
 }

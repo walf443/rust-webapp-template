@@ -29,7 +29,7 @@ async fn found_case() {
     .bind(&user.name)
     .bind(&user.description)
     .bind(&user.display_name)
-    .bind(&user.password)
+    .bind(user.password.as_str())
     .execute(mysql_conn)
     .await
     .unwrap();

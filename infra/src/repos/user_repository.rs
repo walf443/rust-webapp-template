@@ -21,7 +21,6 @@ impl UserRepository for UserRepositoryInfra {
         user: &CreateUser,
     ) -> {{ crate_name }}_domain::repos::Result<UserId> {
         let conn = crate::rdb::get_mysql_conn(conn);
-        let hashed_password = self.hash_password(&user.password)?;
 
         let result = sqlx::query(
             "INSERT INTO users (name, display_name, description, password) VALUES(?, ?, ?, ?)",
@@ -29,7 +28,7 @@ impl UserRepository for UserRepositoryInfra {
         .bind(&user.name)
         .bind(&user.display_name)
         .bind(&user.description)
-        .bind(&hashed_password)
+        .bind(user.password.as_str())
         .execute(conn)
         .await
         .map_err(crate::rdb::sqlx_err)?;
@@ -45,13 +44,12 @@ impl UserRepository for UserRepositoryInfra {
         id: &UserId,
     ) -> {{ crate_name }}_domain::repos::Result<Option<User>> {
         let conn = crate::rdb::get_mysql_conn(conn);
-        let user_model: Option<crate::rows::UserRow> = sqlx::query_as(
-            "SELECT id, name, display_name, description, password as hashed_password FROM users WHERE id = ?",
-        )
-        .bind(id)
-        .fetch_optional(conn)
-        .await
-        .map_err(crate::rdb::sqlx_err)?;
+        let user_model: Option<crate::rows::UserRow> =
+            sqlx::query_as("SELECT id, name, display_name, description FROM users WHERE id = ?")
+                .bind(id)
+                .fetch_optional(conn)
+                .await
+                .map_err(crate::rdb::sqlx_err)?;
 
         Ok(user_model.map(User::from))
     }
@@ -61,12 +59,11 @@ impl UserRepository for UserRepositoryInfra {
         conn: &mut RDBConnection,
     ) -> {{ crate_name }}_domain::repos::Result<Vec<User>> {
         let conn = crate::rdb::get_mysql_conn(conn);
-        let users: Vec<crate::rows::UserRow> = sqlx::query_as(
-            "SELECT id, name, display_name, description, password as hashed_password FROM users",
-        )
-        .fetch_all(conn)
-        .await
-        .map_err(crate::rdb::sqlx_err)?;
+        let users: Vec<crate::rows::UserRow> =
+            sqlx::query_as("SELECT id, name, display_name, description FROM users")
+                .fetch_all(conn)
+                .await
+                .map_err(crate::rdb::sqlx_err)?;
 
         Ok(users.into_iter().map(User::from).collect())
     }
@@ -92,13 +89,12 @@ impl UserRepository for UserRepositoryInfra {
         name: &str,
     ) -> {{ crate_name }}_domain::repos::Result<Option<User>> {
         let conn = crate::rdb::get_mysql_conn(conn);
-        let user_model: Option<crate::rows::UserRow> = sqlx::query_as(
-            "SELECT id, name, display_name, description, password as hashed_password FROM users WHERE name = ?",
-        )
-        .bind(name)
-        .fetch_optional(conn)
-        .await
-        .map_err(crate::rdb::sqlx_err)?;
+        let user_model: Option<crate::rows::UserRow> =
+            sqlx::query_as("SELECT id, name, display_name, description FROM users WHERE name = ?")
+                .bind(name)
+                .fetch_optional(conn)
+                .await
+                .map_err(crate::rdb::sqlx_err)?;
 
         Ok(user_model.map(User::from))
     }

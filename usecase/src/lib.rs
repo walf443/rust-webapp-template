@@ -1,3 +1,4 @@
+use {{ crate_name }}_domain::models::PasswordHashError;
 use {{ crate_name }}_domain::repos::ReposError;
 use thiserror::Error;
 
@@ -13,6 +14,8 @@ pub enum UsecaseError {
     ReposError(#[from] ReposError),
     #[error("rdb error: #{0}")]
     RDBError(#[from] {{ crate_name }}_domain::rdb::RDBError),
+    #[error("password hash error: #{0}")]
+    PasswordHash(#[from] PasswordHashError),
 }
 
 pub type UsecaseResult<T> = Result<T, UsecaseError>;
