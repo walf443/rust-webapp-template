@@ -8,9 +8,9 @@ publish = false
 {{ project-name }}-domain = { path = "../domain" }
 
 async-trait.workspace = true
+fake.workspace = true
 thiserror.workspace = true
 
 [dev-dependencies]
 {{ project-name }}-domain = { path = "../domain", features = ["test"] }
-fake.workspace = true
 tokio.workspace = true

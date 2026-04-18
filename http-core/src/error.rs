@@ -38,6 +38,9 @@ impl From<UsecaseError> for Error {
         match err {
             UsecaseError::ReposError(e) => Self::ReposError(e),
             UsecaseError::RDBError(e) => Self::RDB(e),
+            UsecaseError::PasswordHash(
+                {{ crate_name }}_domain::models::PasswordHashError::HashFailed(e),
+            ) => Self::Bcrypt(e),
         }
     }
 }

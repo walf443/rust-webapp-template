@@ -1,5 +1,6 @@
 use crate::repos::user_repository::UserRepositoryInfra;
 use fake::{Fake, Faker};
+use {{ crate_name }}_domain::models::HashedPassword;
 use {{ crate_name }}_domain::models::user::{User, UserId};
 use {{ crate_name }}_domain::rdb::RDBPool;
 use {{ crate_name }}_domain::repos::user_repository::UserRepository;
@@ -15,10 +16,8 @@ async fn found_case() {
     let mut user: User = Faker.fake();
     user.id = user_id.clone();
     user.display_name = Some(Faker.fake());
-    let password: String = Faker.fake();
-    let hashed_password = repo.hash_password(&password).unwrap();
-    user.hashed_password = Some(hashed_password);
     user.description = Some(Faker.fake());
+    let hashed_password: HashedPassword = Faker.fake();
 
     let mysql_conn = crate::rdb::get_mysql_conn(&mut conn);
     sqlx::query(
@@ -28,7 +27,7 @@ async fn found_case() {
     .bind(&user.name)
     .bind(&user.display_name)
     .bind(&user.description)
-    .bind(&user.hashed_password)
+    .bind(hashed_password.as_str())
     .execute(mysql_conn)
     .await
     .unwrap();

@@ -6,8 +6,6 @@ pub(crate) struct UserRow {
     pub name: UserName,
     pub display_name: Option<String>,
     pub description: Option<String>,
-    #[sqlx(default, rename = "password")]
-    pub hashed_password: Option<String>,
 }
 
 impl From<UserRow> for User {
@@ -17,7 +15,6 @@ impl From<UserRow> for User {
             name: row.name,
             display_name: row.display_name,
             description: row.description,
-            hashed_password: row.hashed_password,
         }
     }
 }

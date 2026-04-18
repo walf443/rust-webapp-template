@@ -8,12 +8,6 @@ use async_trait::async_trait;
 pub trait UserRepository {
     async fn create(&self, conn: &mut RDBConnection, user: &CreateUser) -> Result<UserId>;
 
-    fn hash_password(&self, password: &str) -> Result<String> {
-        const BCRYPT_DEFAULT_COST: u32 = 4;
-        let hashed_password = bcrypt::hash(password, BCRYPT_DEFAULT_COST)?;
-        Ok(hashed_password)
-    }
-
     async fn find(&self, conn: &mut RDBConnection, id: &UserId) -> Result<Option<User>>;
     async fn find_all(&self, conn: &mut RDBConnection) -> Result<Vec<User>>;
     async fn find_id_by_name(&self, conn: &mut RDBConnection, name: &str)

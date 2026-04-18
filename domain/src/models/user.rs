@@ -1,3 +1,4 @@
+use super::hashed_password::HashedPassword;
 use super::id::Id;
 use fake::Dummy;
 
@@ -7,7 +8,6 @@ pub struct User {
     pub name: UserName,
     pub display_name: Option<String>,
     pub description: Option<String>,
-    pub hashed_password: Option<String>,
 }
 
 pub type UserId = Id<User, i64>;
@@ -19,5 +19,5 @@ pub struct CreateUser {
     pub name: String,
     pub display_name: String,
     pub description: String,
-    pub password: String,
+    pub password: HashedPassword,
 }

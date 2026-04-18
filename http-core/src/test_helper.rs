@@ -1,8 +1,9 @@
 use crate::state::AppState;
 use async_trait::async_trait;
-use {{ crate_name }}_domain::models::user::{CreateUser, User, UserId};
+use {{ crate_name }}_domain::models::user::{User, UserId};
 use {{ crate_name }}_usecase::UsecaseResult;
 use {{ crate_name }}_usecase::manager::UsecaseManager;
+use {{ crate_name }}_usecase::user::user_registration::RegisterUserInput;
 use {{ crate_name }}_usecase::user::{
     FindUserByNameUsecase, FindUserUsecase, HaveUserUsecases, UserRegistrationUsecase,
 };
@@ -26,7 +27,7 @@ impl FindUserByNameUsecase for TestUserUsecases {
 
 #[async_trait]
 impl UserRegistrationUsecase for TestUserUsecases {
-    async fn register_user(&self, _user: &CreateUser) -> UsecaseResult<User> {
+    async fn register_user(&self, _input: &RegisterUserInput) -> UsecaseResult<User> {
         unimplemented!()
     }
 }
