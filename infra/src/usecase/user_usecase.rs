@@ -1,6 +1,6 @@
 use crate::repos::user_repository::UserRepositoryInfra;
-use {{ crate_name }}_core::rdb::{HaveRDBPool, RDBPool};
-use {{ crate_name }}_core::repos::user_repository::HaveUserRepository;
+use {{ crate_name }}_domain::rdb::{HaveRDBPool, RDBPool};
+use {{ crate_name }}_domain::repos::user_repository::HaveUserRepository;
 use {{ crate_name }}_usecase::user_usecase::UserUsecaseImpl;
 
 #[derive(Clone)]

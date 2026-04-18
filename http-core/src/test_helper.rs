@@ -1,6 +1,6 @@
 use crate::state::AppState;
 use async_trait::async_trait;
-use {{ crate_name }}_core::models::user::{CreateUser, User, UserId};
+use {{ crate_name }}_domain::models::user::{CreateUser, User, UserId};
 use {{ crate_name }}_usecase::UsecaseResult;
 use {{ crate_name }}_usecase::manager::UsecaseManager;
 use {{ crate_name }}_usecase::user_usecase::{HaveUserUsecase, UserUsecase};

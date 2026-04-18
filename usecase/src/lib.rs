@@ -1,4 +1,4 @@
-use {{ crate_name }}_core::repos::ReposError;
+use {{ crate_name }}_domain::repos::ReposError;
 use thiserror::Error;
 
 pub mod manager;
@@ -12,7 +12,7 @@ pub enum UsecaseError {
     #[error("repos error: #{0}")]
     ReposError(#[from] ReposError),
     #[error("rdb error: #{0}")]
-    RDBError(#[from] {{ crate_name }}_core::rdb::RDBError),
+    RDBError(#[from] {{ crate_name }}_domain::rdb::RDBError),
 }
 
 pub type UsecaseResult<T> = Result<T, UsecaseError>;

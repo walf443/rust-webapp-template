@@ -1,5 +1,5 @@
 [workspace]
-members = ["core", "usecase", "infra", "http-core", "http-app"]
+members = ["domain", "usecase", "infra", "http-core", "http-app"]
 resolver = "2"
 
 [workspace.dependencies]

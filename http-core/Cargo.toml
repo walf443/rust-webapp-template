@@ -5,7 +5,7 @@ edition = "2024"
 publish = false
 
 [dependencies]
-{{ project-name }}-core = { path = "../core" }
+{{ project-name }}-domain = { path = "../domain" }
 {{ project-name }}-usecase = { path = "../usecase" }
 
 async-session.workspace = true

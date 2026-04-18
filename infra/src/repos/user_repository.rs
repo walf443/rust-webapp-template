@@ -6,9 +6,9 @@ mod find;
 mod find_by_name;
 
 use async_trait::async_trait;
-use {{ crate_name }}_core::models::user::{CreateUser, User, UserId};
-use {{ crate_name }}_core::rdb::RDBConnection;
-use {{ crate_name }}_core::repos::user_repository::UserRepository;
+use {{ crate_name }}_domain::models::user::{CreateUser, User, UserId};
+use {{ crate_name }}_domain::rdb::RDBConnection;
+use {{ crate_name }}_domain::repos::user_repository::UserRepository;
 
 #[derive(Clone)]
 pub struct UserRepositoryInfra {}
@@ -19,7 +19,7 @@ impl UserRepository for UserRepositoryInfra {
         &self,
         conn: &mut RDBConnection,
         user: &CreateUser,
-    ) -> {{ crate_name }}_core::repos::Result<UserId> {
+    ) -> {{ crate_name }}_domain::repos::Result<UserId> {
         let conn = crate::rdb::get_mysql_conn(conn);
         let hashed_password = self.hash_password(&user.password)?;
 
@@ -43,7 +43,7 @@ impl UserRepository for UserRepositoryInfra {
         &self,
         conn: &mut RDBConnection,
         id: &UserId,
-    ) -> {{ crate_name }}_core::repos::Result<Option<User>> {
+    ) -> {{ crate_name }}_domain::repos::Result<Option<User>> {
         let conn = crate::rdb::get_mysql_conn(conn);
         let user_model: Option<crate::rows::UserRow> = sqlx::query_as(
             "SELECT id, name, display_name, description, password as hashed_password FROM users WHERE id = ?",
@@ -59,7 +59,7 @@ impl UserRepository for UserRepositoryInfra {
     async fn find_all(
         &self,
         conn: &mut RDBConnection,
-    ) -> {{ crate_name }}_core::repos::Result<Vec<User>> {
+    ) -> {{ crate_name }}_domain::repos::Result<Vec<User>> {
         let conn = crate::rdb::get_mysql_conn(conn);
         let users: Vec<crate::rows::UserRow> = sqlx::query_as(
             "SELECT id, name, display_name, description, password as hashed_password FROM users",
@@ -75,7 +75,7 @@ impl UserRepository for UserRepositoryInfra {
         &self,
         conn: &mut RDBConnection,
         name: &str,
-    ) -> {{ crate_name }}_core::repos::Result<Option<UserId>> {
+    ) -> {{ crate_name }}_domain::repos::Result<Option<UserId>> {
         let conn = crate::rdb::get_mysql_conn(conn);
         let user_id: Option<UserId> = sqlx::query_scalar("SELECT id FROM users WHERE name = ?")
             .bind(name)
@@ -90,7 +90,7 @@ impl UserRepository for UserRepositoryInfra {
         &self,
         conn: &mut RDBConnection,
         name: &str,
-    ) -> {{ crate_name }}_core::repos::Result<Option<User>> {
+    ) -> {{ crate_name }}_domain::repos::Result<Option<User>> {
         let conn = crate::rdb::get_mysql_conn(conn);
         let user_model: Option<crate::rows::UserRow> = sqlx::query_as(
             "SELECT id, name, display_name, description, password as hashed_password FROM users WHERE name = ?",

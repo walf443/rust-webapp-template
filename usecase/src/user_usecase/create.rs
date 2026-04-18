@@ -1,8 +1,8 @@
 use crate::test_helper::MockRepositoryManager;
 use crate::user_usecase::UserUsecase;
 use fake::{Fake, Faker};
-use {{ crate_name }}_core::models::user::{CreateUser, UserId};
-use {{ crate_name }}_core::repos::ReposError::TestError;
+use {{ crate_name }}_domain::models::user::{CreateUser, UserId};
+use {{ crate_name }}_domain::repos::ReposError::TestError;
 
 #[tokio::test]
 async fn user_repo_create_fail() {
