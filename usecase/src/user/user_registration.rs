@@ -23,6 +23,8 @@ impl<T: UserRegistrationUsecaseImpl> UserRegistrationUsecase for T {
 
         let hashed_password = self.user_repo().hash_password(&user.password)?;
 
+        tx.commit().await?;
+
         Ok(User {
             id: user_id,
             name: UserName::new(user.name.clone()),
