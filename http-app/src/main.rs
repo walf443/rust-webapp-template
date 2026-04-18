@@ -1,7 +1,7 @@
 use {{ crate_name }}_http_core::routes::routes;
 use {{ crate_name }}_http_core::state::AppState;
 use {{ crate_name }}_infra::rdb::{MySqlRDBPool, build_database_connection_options};
-use {{ crate_name }}_infra::usecases::manager::UsecaseManagerInfra;
+use {{ crate_name }}_infra::usecase::manager::UsecaseManagerInfra;
 use tokio::net::TcpListener;
 
 #[tokio::main]
