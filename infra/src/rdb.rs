@@ -133,7 +133,7 @@ pub(crate) async fn get_test_pool() -> MySqlRDBPool {
 }
 
 #[cfg(test)]
-#[ctor::dtor]
+#[dtor::dtor]
 fn cleanup_test_container() {
     let Some(container) = TEST_CONTAINER
         .lock()

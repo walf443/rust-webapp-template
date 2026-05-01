@@ -31,6 +31,6 @@ fake = { version = "5", features=["derive"] }
 mockall = "0.14"
 qbey = { version = "0.3" }
 sqlx = { version = "0.8", features = ["mysql", "runtime-tokio"] }
-ctor = "0.12"
+dtor = "0.12"
 testcontainers = "0.27"
 testcontainers-modules = { version = "0.15", features = ["mysql"] }
