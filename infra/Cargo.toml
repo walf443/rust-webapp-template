@@ -13,7 +13,7 @@ sqlx.workspace = true
 
 [dev-dependencies]
 {{ project-name }}-domain = { path = "../domain", features = ["test"]}
-ctor.workspace = true
+dtor.workspace = true
 fake.workspace = true
 testcontainers.workspace = true
 testcontainers-modules.workspace = true
