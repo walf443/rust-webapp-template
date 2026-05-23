@@ -6,7 +6,7 @@ resolver = "2"
 kubetsu = { version = "0.7" }
 kubetsu-serde = { version = "0.1" }
 kubetsu-fake = { version = "0.1" }
-kubetsu-sqlx= { version = "0.1", features = ["mysql"]}
+kubetsu-sqlx= { version = "0.2", features = ["mysql"]}
 async-session = "3"
 axum = { version = "0.8", features = ["tracing"] }
 axum-extra = { version = "0.12", features = ["cookie-signed", "cookie-key-expansion", "typed-header"] }
@@ -30,7 +30,7 @@ uuid = { version = "1", features = ["v4"] }
 fake = { version = "5", features=["derive"] }
 mockall = "0.14"
 qbey = { version = "0.3" }
-sqlx = { version = "0.8", features = ["mysql", "runtime-tokio"] }
+sqlx = { version = "0.9", features = ["mysql", "runtime-tokio"] }
 dtor = "1.0"
 testcontainers = "0.27"
 testcontainers-modules = { version = "0.15", features = ["mysql"] }
