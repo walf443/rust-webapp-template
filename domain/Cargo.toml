@@ -16,5 +16,5 @@ kubetsu-fake.workspace = true
 kubetsu-serde.workspace = true
 kubetsu-sqlx.workspace = true
 fake.workspace = true
-mockall = { version = "0.14", optional = true }
+mockall = { version = "0.15", optional = true }
 thiserror.workspace = true
