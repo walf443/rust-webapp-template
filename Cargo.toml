@@ -33,4 +33,3 @@ qbey = { version = "0.3" }
 sqlx = { version = "0.9", features = ["mysql", "runtime-tokio"] }
 dtor = "1.0"
 testcontainers = "0.27"
-testcontainers-modules = { version = "0.15", features = ["mysql"] }

@@ -16,5 +16,4 @@ sqlx.workspace = true
 dtor.workspace = true
 fake.workspace = true
 testcontainers.workspace = true
-testcontainers-modules.workspace = true
 tokio.workspace = true
