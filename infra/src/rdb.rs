@@ -92,18 +92,30 @@ static TEST_POOL: tokio::sync::OnceCell<MySqlRDBPool> = tokio::sync::OnceCell::c
 
 #[cfg(test)]
 static TEST_CONTAINER: std::sync::Mutex<
-    Option<testcontainers::ContainerAsync<testcontainers_modules::mysql::Mysql>>,
+    Option<testcontainers::ContainerAsync<testcontainers::GenericImage>>,
 > = std::sync::Mutex::new(None);
 
 #[cfg(test)]
 pub(crate) async fn get_test_pool() -> MySqlRDBPool {
+    use testcontainers::core::WaitFor;
     use testcontainers::runners::AsyncRunner;
-    use testcontainers_modules::mysql::Mysql;
+    use testcontainers::{GenericImage, ImageExt};
 
     TEST_POOL
         .get_or_init(|| async {
-            let container = Mysql::default()
-                .with_init_sql(include_str!("../schema.sql").to_string().into_bytes())
+            let container = GenericImage::new("mysql", "9.7")
+                .with_wait_for(WaitFor::message_on_stderr(
+                    "X Plugin ready for connections. Bind-address",
+                ))
+                .with_wait_for(WaitFor::message_on_stderr(
+                    "/usr/sbin/mysqld: ready for connections.",
+                ))
+                .with_env_var("MYSQL_DATABASE", "test")
+                .with_env_var("MYSQL_ALLOW_EMPTY_PASSWORD", "yes")
+                .with_copy_to(
+                    "/docker-entrypoint-initdb.d/init.sql",
+                    include_str!("../schema.sql").to_string().into_bytes(),
+                )
                 .start()
                 .await
                 .expect("Failed to start MySQL container");
