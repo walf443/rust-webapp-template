@@ -32,4 +32,4 @@ mockall = "0.15"
 qbey = { version = "0.3" }
 sqlx = { version = "0.9", features = ["mysql", "runtime-tokio"] }
 dtor = "1.0"
-testcontainers = "0.27"
+testcontainers = "0.28"
