@@ -3,7 +3,7 @@ members = ["domain", "usecase", "infra", "http-core", "http-app"]
 resolver = "2"
 
 [workspace.dependencies]
-kubetsu = { version = "0.8" }
+kubetsu = { version = "0.9" }
 kubetsu-serde = { version = "0.2" }
 kubetsu-fake = { version = "0.2" }
 kubetsu-sqlx= { version = "0.3", features = ["mysql"]}
