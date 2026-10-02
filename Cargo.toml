@@ -29,7 +29,7 @@ tracing-subscriber = { version =  "0.3", features = ["env-filter"] }
 uuid = { version = "1", features = ["v4"] }
 fake = { version = "5", features=["derive"] }
 mockall = "0.15"
-qbey = { version = "0.3" }
+qbey = { version = "0.4" }
 sqlx = { version = "0.9", features = ["mysql", "runtime-tokio"] }
 dtor = "1.0"
 testcontainers = "0.28"
